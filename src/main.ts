@@ -1,5 +1,6 @@
 import { runPingPong, runMorningCommand, runTimeCommand, runAuthorCommand } from "./commands/index.ts";
 import { apiKey, session, websocket, chatId } from "./config/env.ts";
+import { MentionAll } from "./commands/function/mention-all.ts";
 
 const events = ['session.status', 'message'];
 
@@ -46,6 +47,7 @@ const commandHandlers: Record<string, () => Promise<void>> = {
   "/morning": runMorningCommand,
   "/time": runTimeCommand,
   "/author": runAuthorCommand,
+  "/everyone": MentionAll,
 };
 
 // Handle incoming messages
