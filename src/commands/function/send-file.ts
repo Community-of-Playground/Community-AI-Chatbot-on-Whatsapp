@@ -1,4 +1,4 @@
-import { apiKey, session, chatId, baseUrl } from "../../config/env.ts";
+import { apiKey, session, chatIds, baseUrl } from "../../config/env.ts";
 
 export async function sendTextMessage(caption: string) {
   const response = await fetch(`${baseUrl}/api/sendText`, {

@@ -1,8 +1,8 @@
-import { apiKey, session, chatId, baseUrl } from "../../config/env.ts";
+import { apiKey, session, chatIds, baseUrl } from "../../config/env.ts";
 
 // Function to fetch group participants
 export async function getGroupParticipants() {
-    const response = await fetch(`${baseUrl}/api/${session}/groups/${chatId}/participants`, {
+    const response = await fetch(`${baseUrl}/api/${session}/groups/${chatIds}/participants`, {
         method: "GET",
         headers: {
             "accept": "*/*",
@@ -15,13 +15,13 @@ export async function getGroupParticipants() {
     }
 
     const participants = await response.json();
-    console.log("Participants:", participants);
+    // console.log("Participants:", participants);
 
     // Extract and return only the 'id' values, converting format
     const participantIds = participants.map((participant: { id: string }) => 
         participant.id.replace("@s.whatsapp.net", "@c.us")
     );
-    console.log("Participant IDs:", participantIds);
+    console.log(participantIds);
     return participantIds;
 }
 
@@ -37,7 +37,7 @@ export async function MentionAll() {
             "X-Api-Key": apiKey,
         },
         body: JSON.stringify({
-            chatId: chatId,
+            chatId: chatIds[0], // Assuming you want to send to the first chatId
             reply_to: null,
             text: participants.map((id: string) => `@${id.replace("@c.us", "")}`).join(" "),
             session: session,
