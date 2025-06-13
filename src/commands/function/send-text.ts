@@ -6,7 +6,7 @@ export async function sendTextMessage(text: string, chatId: string, reply_to: st
     headers: {
       "accept": "application/json",
       "Content-Type": "application/json",
-      "X-Api-Key": apiKey,
+      "X-Api-Key": apiKey ?? "",
     },
     body: JSON.stringify({
       chatId: chatId,

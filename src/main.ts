@@ -8,10 +8,14 @@ const events = ['session.status',
     'group.v2.participants'
 ];
 
-const queryParams = new URLSearchParams({
-    'x-api-key': apiKey,
-    session,
-    ...events.reduce((acc, event) => ({ ...acc, events: event }), {}) // Add multiple 'events' params
+// Create query parameters
+const queryParams = new URLSearchParams();
+queryParams.set('x-api-key', apiKey!);
+queryParams.set('session', session!);
+
+// Add multiple events parameters
+events.forEach(event => {
+    queryParams.append('events', event);
 });
 
 const wsUrl = `${websocket}?${queryParams.toString()}`;
